@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://img.z4a.net/images/2024/07/21/118980490.jpeg">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://img.z4a.net/images/2024/07/21/118980490.jpeg">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://img.z4a.net/images/2024/07/21/118980490.jpeg">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://img.z4a.net/images/2024/07/21/118980490.jpeg">
+    
+    
+        <link rel="mask-icon" href="https://img.z4a.net/images/2024/07/21/118980490.jpeg">
+    
+
+
+    <!-- meta -->
+
+
+<title>Git使用基础 | Dyna&#39;s Blog</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="摘要： 想象一下，如果你有一个时光机，可以回到过去，看看你的代码在任何时刻的样子，或者尝试不同的变化，而不必担心破坏原始代码。Git就是这样的时光机，它让你的代码开发之旅变得轻松而有趣。 1. Git是什么？ Git就像是一个超级日记本，记录了你代码的每一个变化。无论你怎么修改，它都能帮你记住每一个版本。 2. 给Git找个家 首先，你需要在你的电脑上为Git找个家。就像安装一个新软件一样，去Gi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git使用基础">
+<meta property="og:url" content="https://dyna-typesupercomputer.github.io/2024/07/31/Git%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Dyna&#39;s Blog">
+<meta property="og:description" content="摘要： 想象一下，如果你有一个时光机，可以回到过去，看看你的代码在任何时刻的样子，或者尝试不同的变化，而不必担心破坏原始代码。Git就是这样的时光机，它让你的代码开发之旅变得轻松而有趣。 1. Git是什么？ Git就像是一个超级日记本，记录了你代码的每一个变化。无论你怎么修改，它都能帮你记住每一个版本。 2. 给Git找个家 首先，你需要在你的电脑上为Git找个家。就像安装一个新软件一样，去Gi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-31T07:14:03.000Z">
+<meta property="article:modified_time" content="2024-07-31T07:14:57.224Z">
+<meta property="article:author" content="DYNA X">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/highlight.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/highlight.dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Dyna&#39;s Blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friends/" class="navbar-menu button">友链</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">友链</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        Git使用基础
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2024/07/" class="post-meta__date button">2024-07-31</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p><strong>摘要：</strong> 想象一下，如果你有一个时光机，可以回到过去，看看你的代码在任何时刻的样子，或者尝试不同的变化，而不必担心破坏原始代码。Git就是这样的时光机，它让你的代码开发之旅变得轻松而有趣。</p>
+<p><strong>1. Git是什么？</strong> Git就像是一个超级日记本，记录了你代码的每一个变化。无论你怎么修改，它都能帮你记住每一个版本。</p>
+<p><strong>2. 给Git找个家</strong> 首先，你需要在你的电脑上为Git找个家。就像安装一个新软件一样，去Git的官方网站下载并安装它。</p>
+<p><strong>3. 告诉Git你是谁</strong> 安装完成后，告诉Git你的名字和邮箱，这样它就知道每次保存日记的是你了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashgit config --global user.name &quot;你的名字&quot;</span><br><span class="line">git config --global user.email &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 开始写日记</strong> 当你开始一个新项目时，就像打开一个新日记本。告诉Git你准备好了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashmkdir 我的项目  # 创建一个新文件夹</span><br><span class="line">cd 我的项目    # 进入这个文件夹</span><br><span class="line">git init        # 初始化Git仓库</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 写第一篇日记</strong> 创建一个文件，比如<code>README.md</code>，然后告诉Git你想要保存这个文件的当前状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashtouch README.md  # 创建一个新文件</span><br><span class="line">git add README.md  # 把文件添加到待保存列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 保存这一刻</strong> 当你准备好了，就可以用<code>commit</code>命令保存这一刻的代码。就像在日记本上写下日期和发生了什么。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash</span><br><span class="line">git commit -m &quot;开始写日记&quot;  # 提交更改，并写下提交信息</span><br></pre></td></tr></table></figure>
+
+<p><strong>7. 看看日记本的当前状态</strong> 想知道你的日记本里都写了些什么？用<code>status</code>命令看看。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash</span><br><span class="line">git status  # 查看当前状态</span><br></pre></td></tr></table></figure>
+
+<p><strong>8. 从图书馆借书</strong> 如果你想从别人那里获取代码，就像从图书馆借一本书。使用<code>clone</code>命令来复制别人的代码库。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash</span><br><span class="line">git clone 网址  # 克隆远程仓库</span><br></pre></td></tr></table></figure>
+
+<p><strong>9. 借书和还书</strong> 当你从图书馆借了书回来，你可能会做一些笔记或者修改。<code>pull</code>命令就像更新你的借书记录，而<code>push</code>命令就像把做好的笔记还回图书馆。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashgit pull origin master  # 从远程仓库拉取最新代码</span><br><span class="line">git push origin master  # 把本地更改推送到远程仓库</span><br></pre></td></tr></table></figure>
+
+<p><strong>10. 探索不同的小路</strong> Git的分支功能就像你在森林里探索不同的小路。你可以轻松地尝试新的想法，而不影响主路。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashgit branch 新小路  # 创建新分支</span><br><span class="line">git checkout 新小路  # 切换到新分支</span><br><span class="line">git merge 新小路  # 将新小路的探索成果合并回主路</span><br></pre></td></tr></table></figure>
+
+<p><strong>11. 解决迷路</strong> 当你和别人同时探索森林时，可能会在某个地方迷路。Git会帮你标记出来，你需要自己找到出路。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash</span><br><span class="line">git mergetool  # 打开合并工具，解决冲突</span><br></pre></td></tr></table></figure>
+
+<p><strong>12. 时光倒流</strong> 如果你走错了路，Git可以帮你回到过去，撤销一些步骤。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bashgit reset HEAD^  # 撤销上一次提交</span><br><span class="line">git checkout -- 文件名  # 撤销对文件的更改</span><br></pre></td></tr></table></figure>
+
+<p><strong>13. 结束语</strong> Git是一个强大的时光机，它不仅能帮你记住代码的每一次变化，还能让你在不同的时间线之间自由穿梭。现在，拿起你的日记本，开始你的代码探险之旅吧！</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2024-07-31</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2024/07/31/%E8%A7%A3%E5%86%B3ssh-connect-to-host-github/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            解决ssh connect to host github
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2024/07/22/Typora-2024-%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            Typora 2024 破解教程
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+    
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024 <a href="/">Dyna&#39;s Blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
